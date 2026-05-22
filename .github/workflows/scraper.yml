@@ -1,10 +1,8 @@
 name: Daily Article Scraper
 
 on:
-  # Runs automatically every day at 6am UTC
   schedule:
     - cron: '0 6 * * *'
-  # Also lets you trigger it manually from GitHub
   workflow_dispatch:
 
 jobs:
@@ -13,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        ref: main
-        fetch-depth: 0
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
