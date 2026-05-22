@@ -68,6 +68,7 @@ Do not return two JSON objects. Do not add any text before or after the JSON."""
         )
 
         raw = response.content[0].text
+        print(f"RAW CLAUDE RESPONSE: {repr(raw)}")  # This shows us exactly what Claude returned
         cleaned = clean_json(raw)
 
         result = json.loads(cleaned)
