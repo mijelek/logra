@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(__file__))
+
 from feeds import RSS_FEEDS
 from scraper import get_feed_entries, scrape_article
 from summariser import summarise_article
@@ -6,6 +11,7 @@ from database import article_exists, store_article
 def run():
     total_stored = 0
     total_skipped = 0
+    total_failed = 0
 
     print("Starting article collection...")
 
@@ -15,6 +21,9 @@ def run():
 
         for entry in entries:
             url = entry['url']
+
+            if not url or not entry['title']:
+                continue
 
             # Skip if already in database
             if article_exists(url):
@@ -27,13 +36,15 @@ def run():
 
             # Fall back to RSS description if scraping fails
             if not content:
-                content = entry['description']
+                content = entry.get('description', '')
 
-            if not content:
+            if not content or len(content) < 100:
+                print(f"  → No content found: {entry['title'][:50]}")
+                total_failed += 1
                 continue
 
             # Summarise with Claude Haiku
-            print(f"  → Summarising: {title[:50]}")
+            print(f"  → Summarising: {entry['title'][:50]}")  # ← fixed
             try:
                 result = summarise_article(
                     entry['title'],
@@ -46,7 +57,7 @@ def run():
                 result = None
 
             if not result or result.get('skip'):
-                print(f"Not AI relevant, skipping: {entry['title']}")
+                print(f"  → Not AI relevant, skipping")
                 total_skipped += 1
                 continue
 
@@ -54,8 +65,10 @@ def run():
             stored = store_article(result, url)
             if stored:
                 total_stored += 1
+            else:
+                total_failed += 1
 
-    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped}")
+    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
 
 if __name__ == '__main__':
     run()
