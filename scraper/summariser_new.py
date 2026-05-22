@@ -7,15 +7,11 @@ client = anthropic.Anthropic(api_key=os.environ.get('ANTHROPIC_API_KEY'))
 
 def clean_json(raw):
     """Robustly extract the best JSON object from a string"""
-
-    # Strip markdown fences
     raw = raw.replace('```json', '').replace('```', '').strip()
 
-    # If only one JSON object, return it directly
-    if raw.count('{') == 1:
+    if raw.count('{') <= 1:
         return raw
 
-    # Find all JSON objects in the string
     objects = []
     depth = 0
     start = None
@@ -34,12 +30,18 @@ def clean_json(raw):
     if not objects:
         return raw
 
-    # Return the longest object — always the full article summary
     return max(objects, key=len)
 
 def summarise_article(title, content, category):
     """Send raw article to Claude Haiku for summarisation"""
+    raw = None
     try:
+        # Clean content before sending
+        content = content.encode('utf-8', errors='ignore').decode('utf-8')
+        title = title.encode('utf-8', errors='ignore').decode('utf-8')
+
+        print(f"  → Calling Claude API...")
+
         response = client.messages.create(
             model='claude-haiku-4-5-20251001',
             max_tokens=1000,
@@ -63,22 +65,24 @@ Category must be one of: awareness, progression, misconceptions
 Do not return two JSON objects. Do not add any text before or after the JSON.""",
             messages=[{
                 'role': 'user',
-                'content': f'Title: {title}\n\nContent: {content}'
+                'content': f'Title: {title}\n\nContent: {content[:3000]}'
             }]
         )
 
         raw = response.content[0].text
-        print(f"RAW CLAUDE RESPONSE: {repr(raw)}")  # This shows us exactly what Claude returned
-        cleaned = clean_json(raw)
+        print(f"  → RAW CLAUDE RESPONSE: {repr(raw[:200])}")
 
+        cleaned = clean_json(raw)
         result = json.loads(cleaned)
         return result
 
     except json.JSONDecodeError as e:
-        raw_preview = response.content[0].text[:300] if response else 'no response'
-        print(f"Summarisation failed: {e}")
-        print(f"Claude returned: {raw_preview}")
+        print(f"  → JSON ERROR: {e}")
+        print(f"  → Raw was: {repr(raw[:200]) if raw else 'None'}")
+        return None
+    except anthropic.APIError as e:
+        print(f"  → API ERROR: {e}")
         return None
     except Exception as e:
-        print(f"Summarisation failed: {e}")
+        print(f"  → UNEXPECTED ERROR: {type(e).__name__}: {e}")
         return None
