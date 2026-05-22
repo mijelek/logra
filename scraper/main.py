@@ -33,11 +33,17 @@ def run():
                 continue
 
             # Summarise with Claude Haiku
-            result = summarise_article(
-                entry['title'],
-                content,
-                feed['category']
-            )
+            print(f"  → Summarising: {title[:50]}")
+            try:
+                result = summarise_article(
+                    entry['title'],
+                    content,
+                    feed['category']
+                )
+                print(f"  → Result: {result}")
+            except Exception as e:
+                print(f"  → MAIN ERROR: {type(e).__name__}: {e}")
+                result = None
 
             if not result or result.get('skip'):
                 print(f"Not AI relevant, skipping: {entry['title']}")
