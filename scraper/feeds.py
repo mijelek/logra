@@ -30,5 +30,45 @@ RSS_FEEDS = [
     {
         'url': 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
         'category': 'awareness'
+    },
+    {
+        'url': 'https://www.bbc.com/news/technology/rss.xml',
+        'category': 'awareness'
+    },
+    {
+        'url': 'https://techcrunch.com/category/artificial-intelligence/feed/',
+        'category': 'progression'
+    },
+    {
+        'url': 'https://www.technologyreview.com/topic/artificial-intelligence/feed',
+        'category': 'progression'
+    },
+    {
+        'url': 'https://www.artificialintelligence-news.com/feed/',
+        'category': 'awareness'
+    },
+    {
+        'url': 'https://syncedreview.com/feed/',
+        'category': 'progression'
+    },
+    {
+        'url': 'https://aiweekly.co/issues.rss',
+        'category': 'awareness'
+    },
+    {
+        'url': 'https://www.deepmind.com/blog/rss.xml',
+        'category': 'progression'
+    },
+    {
+        'url': 'https://bdtechtalks.com/feed/',
+        'category': 'misconceptions'
+    },
+    {
+        'url': 'https://hai.stanford.edu/news/rss.xml',
+        'category': 'awareness'
+    },
+    {
+        'url': 'https://news.mit.edu/topic/artificial-intelligence2/feed',
+        'category': 'progression'
     }
 ]
