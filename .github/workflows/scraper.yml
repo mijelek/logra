@@ -8,7 +8,6 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,13 +28,4 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: python scraper/main.py            stored = store_article(result, url)
-            if stored:
-                total_stored += 1
-            else:
-                total_failed += 1
-
-    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
-
-if __name__ == '__main__':
-    run()
+        run: python scraper/main.py
