@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from feeds import RSS_FEEDS
 from scraper import get_feed_entries, scrape_article
-from summariser import summarise_article
+from summariser_new import summarise_article
 from database import article_exists, store_article
 
 def run():
