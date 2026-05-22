@@ -9,6 +9,7 @@ from summariser_new import summarise_article
 from database import article_exists, store_article
 
 def run():
+    print("VERSION 2 - UPDATED CODE RUNNING")
     total_stored = 0
     total_skipped = 0
     total_failed = 0
