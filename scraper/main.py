@@ -71,4 +71,13 @@ def run():
     print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
 
 if __name__ == '__main__':
+    run()            stored = store_article(result, url)
+            if stored:
+                total_stored += 1
+            else:
+                total_failed += 1
+
+    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
+
+if __name__ == '__main__':
     run()
