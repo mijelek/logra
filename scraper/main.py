@@ -25,16 +25,13 @@ def run():
             if not url or not entry['title']:
                 continue
 
-            # Skip if already in database
             if article_exists(url):
                 print(f"Already exists, skipping: {entry['title']}")
                 total_skipped += 1
                 continue
 
-            # Try to scrape full content
             content = scrape_article(url)
 
-            # Fall back to RSS description if scraping fails
             if not content:
                 content = entry.get('description', '')
 
@@ -43,8 +40,9 @@ def run():
                 total_failed += 1
                 continue
 
-            # Summarise with Claude Haiku
-            print(f"  → Summarising: {entry['title'][:50]}")  # ← fixed
+            print(f"  → Summarising: {entry['title'][:50]}")
+            print(f"  → Content preview: {repr(content[:100])}")
+
             try:
                 result = summarise_article(
                     entry['title'],
@@ -53,31 +51,3 @@ def run():
                 )
                 print(f"  → Result: {result}")
             except Exception as e:
-                print(f"  → MAIN ERROR: {type(e).__name__}: {e}")
-                result = None
-
-            if not result or result.get('skip'):
-                print(f"  → Not AI relevant, skipping")
-                total_skipped += 1
-                continue
-
-            # Store in Supabase
-            stored = store_article(result, url)
-            if stored:
-                total_stored += 1
-            else:
-                total_failed += 1
-
-    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
-
-if __name__ == '__main__':
-    run()            stored = store_article(result, url)
-            if stored:
-                total_stored += 1
-            else:
-                total_failed += 1
-
-    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
-
-if __name__ == '__main__':
-    run()
