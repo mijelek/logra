@@ -1,5 +1,8 @@
 import sys
+sys.dont_write_bytecode = True
+
 import os
+os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
 
 sys.path.insert(0, os.path.dirname(__file__))
 
@@ -9,6 +12,7 @@ from summariser_new import summarise_article
 from database import article_exists, store_article
 
 def run():
+    print(f"Loaded {len(RSS_FEEDS)} feeds")  # confirms feeds.py version
     total_stored = 0
     total_skipped = 0
     total_failed = 0
