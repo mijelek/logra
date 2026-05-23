@@ -12,7 +12,7 @@ RSS_FEEDS = [
         'category': 'awareness'
     },
     {
-        'url': 'https://feeds.feedburner.com/blogspot/gJZg',  # Google AI Blog
+        'url': 'https://feeds.feedburner.com/blogspot/gJZg',
         'category': 'progression'
     },
     {
@@ -26,10 +26,6 @@ RSS_FEEDS = [
     {
         'url': 'https://venturebeat.com/category/ai/feed/',
         'category': 'progression'
-    },
-    {
-        'url': 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
-        'category': 'awareness'
     },
     {
         'url': 'https://www.bbc.com/news/technology/rss.xml',
@@ -70,5 +66,9 @@ RSS_FEEDS = [
     {
         'url': 'https://news.mit.edu/topic/artificial-intelligence2/feed',
         'category': 'progression'
+    },
+    {
+        'url': 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
+        'category': 'awareness'
     }
 ]
