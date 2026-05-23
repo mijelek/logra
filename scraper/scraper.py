@@ -8,6 +8,7 @@ def get_feed_entries(feed_url):
     try:
         socket.setdefaulttimeout(15)
         feed = feedparser.parse(feed_url)
+
         entries = []
 
         for entry in feed.entries:
@@ -18,6 +19,7 @@ def get_feed_entries(feed_url):
                 'description': entry.get('summary', '')
             })
 
+        print(f"  → Found {len(entries)} entries")
         return entries
 
     except Exception as e:
@@ -28,13 +30,13 @@ def scrape_article(url):
     """Fetch full article text from URL"""
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
 
         response = requests.get(url, headers=headers, timeout=10)
 
         if response.status_code != 200:
-            print(f"  → Blocked or unavailable: {url} ({response.status_code})")
+            print(f"  → Blocked or unavailable ({response.status_code})")
             return None
 
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -52,5 +54,5 @@ def scrape_article(url):
         return content[:5000]
 
     except Exception as e:
-        print(f"  → Scraping failed for {url}: {e}")
+        print(f"  → Scraping failed: {e}")
         return None
