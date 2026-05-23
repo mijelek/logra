@@ -52,3 +52,21 @@ def run():
                 )
                 print(f"  → Result: {result}")
             except Exception as e:
+                print(f"  → MAIN ERROR: {type(e).__name__}: {e}")
+                result = None
+
+            if not result or result.get('skip'):
+                print(f"  → Not AI relevant, skipping")
+                total_skipped += 1
+                continue
+
+            stored = store_article(result, url)
+            if stored:
+                total_stored += 1
+            else:
+                total_failed += 1
+
+    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
+
+if __name__ == '__main__':
+    run()
