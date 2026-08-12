@@ -1,0 +1,80 @@
+import sys
+sys.dont_write_bytecode = True
+
+import os
+os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+from feeds import RSS_FEEDS
+from scraper import get_feed_entries, scrape_article
+from summariser_new import summarise_article
+from database import article_exists, store_article
+
+def run():
+    print(f"Loaded {len(RSS_FEEDS)} feeds")  # confirms feeds.py version
+    total_stored = 0
+    total_skipped = 0
+    total_failed = 0
+
+    print("Starting article collection...")
+
+    for feed in RSS_FEEDS:
+        try:
+            print(f"\nProcessing feed: {feed['url']}")
+            entries = get_feed_entries(feed['url'])
+
+            for entry in entries:
+                url = entry['url']
+
+                if not url or not entry['title']:
+                    continue
+
+                if article_exists(url):
+                    print(f"Already exists, skipping: {entry['title']}")
+                    total_skipped += 1
+                    continue
+
+                content = scrape_article(url)
+
+                if not content:
+                    content = entry.get('description', '')
+
+                if not content or len(content) < 100:
+                    print(f"  → No content found: {entry['title'][:50]}")
+                    total_failed += 1
+                    continue
+
+                print(f"  → Summarising: {entry['title'][:50]}")
+
+                try:
+                    result = summarise_article(
+                        entry['title'],
+                        content,
+                        feed['category']
+                    )
+                    print(f"  → Result: {result}")
+                except Exception as e:
+                    print(f"  → MAIN ERROR: {type(e).__name__}: {e}")
+                    result = None
+
+                if not result or result.get('skip'):
+                    print(f"  → Not AI relevant, skipping")
+                    total_skipped += 1
+                    continue
+
+                stored = store_article(result, url)
+                if stored:
+                    total_stored += 1
+                else:
+                    total_failed += 1
+
+        except Exception as e:
+            print(f"  → FEED ERROR: {type(e).__name__}: {e}")
+            print(f"  → Skipping feed: {feed['url']}")
+            continue
+
+    print(f"\nDone! Stored: {total_stored} | Skipped: {total_skipped} | Failed: {total_failed}")
+
+if __name__ == '__main__':
+    run()
