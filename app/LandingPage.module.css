@@ -9,6 +9,8 @@
 
 .blob {
   position: absolute;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .blobOrangeRight {
