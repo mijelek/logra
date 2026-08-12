@@ -1,0 +1,409 @@
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Hedvig+Letters+Sans&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.page {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(180deg, #BD603E 0%, #4A261D 85.93%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.blob {
+  position: absolute;
+}
+
+.blobOrangeRight {
+  width: 1089px;
+  height: 359px;
+  right: -677px;
+  top: 383px;
+  background: #E44118;
+  filter: blur(175px);
+}
+
+.blobBlack {
+  width: 761px;
+  height: 761px;
+  right: 50px;
+  bottom: -336px;
+  background: #070A09;
+  filter: blur(150px);
+}
+
+.blobOrangeLeft {
+  width: 1089px;
+  height: 359px;
+  left: -545px;
+  top: 422px;
+  background: #E44118;
+  filter: blur(175px);
+}
+
+.blobOrange {
+  width: 1151px;
+  height: 428px;
+  left: -239px;
+  top: 135px;
+  background: #D06623;
+  filter: blur(150px);
+}
+
+.logo {
+  position: absolute;
+  width: 120px;
+  left: 47px;
+  top: 50px;
+  z-index: 2;
+}
+
+.nav {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  left: 47px;
+  top: 110px;
+  z-index: 2;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  color: #F9F9F9;
+}
+
+.navItem {
+  cursor: pointer;
+}
+
+.navItem:hover {
+  color: #000000;
+  font-weight: 700;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 120px 47px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: "Hedvig Letters Sans", serif;
+  font-weight: 400;
+  font-size: 32px;
+  color: #FFFFFF;
+}
+
+.count {
+  font-family: "Fragment Mono", monospace;
+  font-size: 12px;
+  color: #A47C73;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filterButton {
+  font-family: "Fragment Mono", monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  background: transparent;
+  color: rgba(249, 249, 249, 0.6);
+  cursor: pointer;
+}
+
+.filterActive {
+  background: rgba(227, 168, 125, 0.25);
+  color: #FFFFFF;
+  border-color: rgba(227, 168, 125, 0.5);
+}
+
+.table {
+  background: rgba(227, 168, 125, 0.12);
+  border-radius: 15px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 130px 100px 60px;
+  gap: 16px;
+  padding: 14px 20px;
+  font-family: "Fragment Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #A47C73;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(249, 249, 249, 0.08);
+  position: sticky;
+  top: 0;
+  background: rgba(227, 168, 125, 0.12);
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 130px 100px 60px;
+  gap: 16px;
+  padding: 16px 20px;
+  align-items: center;
+  border-bottom: 1px solid rgba(249, 249, 249, 0.06);
+  cursor: pointer;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.colTitle {
+  font-family: Inter, sans-serif;
+  font-size: 13px;
+  color: #FFFFFF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.colCategory {
+  display: flex;
+}
+
+.categoryBadge {
+  font-family: "Fragment Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(217, 217, 217, 0.15);
+  color: #D8B49E;
+}
+
+.colDate {
+  font-family: "Fragment Mono", monospace;
+  font-size: 11px;
+  color: rgba(249, 249, 249, 0.5);
+}
+
+.colSource {
+  display: flex;
+  justify-content: center;
+}
+
+.sourceLink {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.sourceLink:hover {
+  opacity: 1;
+}
+
+.expanded {
+  padding: 16px 20px 24px;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(249, 249, 249, 0.06);
+}
+
+.summary {
+  font-family: "Fragment Mono", monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #D8B49E;
+  margin-bottom: 12px;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: "Fragment Mono", monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(249, 249, 249, 0.08);
+  color: rgba(249, 249, 249, 0.6);
+}
+
+.loading {
+  padding: 40px;
+  text-align: center;
+  font-family: "Fragment Mono", monospace;
+  font-size: 13px;
+  color: rgba(249, 249, 249, 0.4);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.searchInput {
+  font-family: "Fragment Mono", monospace;
+  font-size: 12px;
+  padding: 10px 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(249, 249, 249, 0.15);
+  background: rgba(227, 168, 125, 0.1);
+  color: #FFFFFF;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: rgba(249, 249, 249, 0.4);
+}
+
+.searchInput:focus {
+  border-color: rgba(227, 168, 125, 0.5);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 45px;
+  flex-shrink: 0;
+}
+
+.pageButton {
+  font-family: "Fragment Mono", monospace;
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(249, 249, 249, 0.15);
+  background: rgba(227, 168, 125, 0.1);
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.pageButton:hover:not(:disabled) {
+  background: rgba(227, 168, 125, 0.25);
+}
+
+.pageButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  font-family: "Fragment Mono", monospace;
+  font-size: 12px;
+  color: #A47C73;
+}
+
+.copyright {
+  position: absolute;
+  width: 200px;
+  right: 47px;
+  bottom: 40px;
+  font-family: "Fragment Mono", monospace;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: right;
+  color: #A47C73;
+  z-index: 2;
+}
+
+@keyframes shimmer {
+  0% { background: rgba(249, 237, 228, 0.06); }
+  50% { background: rgba(249, 237, 228, 0.15); }
+  100% { background: rgba(249, 237, 228, 0.06); }
+}
+
+.skeletonRow {
+  display: grid;
+  grid-template-columns: 1fr 130px 100px 60px;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(249, 249, 249, 0.06);
+}
+
+.skeletonCell {
+  height: 10px;
+  border-radius: 6px;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeletonCellShort {
+  height: 10px;
+  width: 65%;
+  border-radius: 6px;
+  animation: shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.emptyState {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.emptyStateTitle {
+  font-family: "Hedvig Letters Sans", serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.emptyStateText {
+  font-family: "Fragment Mono", monospace;
+  font-size: 12px;
+  color: rgba(249, 237, 228, 0.5);
+  margin-bottom: 20px;
+}
+
+.emptyStateClear {
+  font-family: "Fragment Mono", monospace;
+  font-size: 12px;
+  padding: 8px 20px;
+  background: rgba(249, 249, 249, 0.1);
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.emptyStateClear:hover {
+  background: rgba(249, 249, 249, 0.2);
+}
+
+.rowHighlighted {
+  background: rgba(227, 168, 125, 0.2);
+  border-left: 3px solid #E8732E;
+}

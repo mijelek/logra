@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Hedvig+Letters+Sans&family=Source+Serif+Pro:ital@0;1&display=swap');
+
+.page {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(180deg, #BD603E 0%, #4A261D 85.93%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.blob {
+  position: absolute;
+}
+
+.blobOrangeRight {
+  width: 600px;
+  height: 280px;
+  right: -300px;
+  top: 150px;
+  background: #E44118;
+  filter: blur(120px);
+}
+
+.blobOrangeLeft {
+  width: 500px;
+  height: 500px;
+  left: -200px;
+  top: 50px;
+  background: #D06623;
+  filter: blur(120px);
+}
+
+.blobDark {
+  width: 600px;
+  height: 400px;
+  right: 50px;
+  bottom: -200px;
+  background: #7A2E12;
+  filter: blur(140px);
+}
+
+.logo {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  left: 47px;
+  top: 50px;
+  z-index: 2;
+}
+
+.nav {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  left: 47px;
+  top: 110px;
+  z-index: 2;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  color: #F9F9F9;
+}
+
+.navItem {
+  cursor: pointer;
+}
+
+.navItem:hover {
+  color: #000000;
+  font-weight: 700;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 725px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 160px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-height: 0;
+  padding-right: 24px;
+  margin-right: -24px;
+}
+
+.messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: rgba(249, 237, 228, 0.2);
+  border-radius: 2px;
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 237, 228, 0.35);
+}
+
+.empty {
+  margin: auto auto 140px auto;
+  text-align: center;
+  max-width: 580px;
+  width: 100%;
+}
+
+.emptyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 80px;
+  width: 100%;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.emptyAsterisk {
+  flex-shrink: 0;
+  animation: spin 8s linear infinite;
+}
+
+.persistentAsterisk {
+  position: absolute;
+  top: 110px;
+  right: 24px;
+  z-index: 2;
+  animation: spin 8s linear infinite;
+}
+
+.emptyWordmark {
+  font-family: Inter, sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.suggestionButton {
+  font-family: "Fragment Mono", monospace;
+  font-size: 13px;
+  color: #FBF3EC;
+  background: rgba(189, 96, 62, 0.2);
+  border: 1px solid rgba(216, 180, 158, 0.2);
+  border-radius: 14px;
+  padding: 12px 20px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 480px;
+  text-align: left;
+}
+
+.suggestionButton:hover {
+  border-color: rgba(216, 180, 158, 0.4);
+  background: rgba(189, 96, 62, 0.3);
+}
+
+.userMessageWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.userMessage {
+  max-width: 60%;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(249, 237, 228, 0.75);
+  font-style: italic;
+  font-family: "Fragment Mono", monospace;
+  text-align: right;
+}
+
+.assistantMessage {
+  align-self: flex-start;
+  max-width: 75%;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #FBF3EC;
+}
+
+.sources {
+  margin-top: 10px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sourceTag {
+  font-size: 11px;
+  font-family: "Fragment Mono", monospace;
+  color: #D8B49E;
+  border: 1px solid rgba(216, 180, 158, 0.3);
+  padding: 3px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.sourceTag:hover {
+  border-color: rgba(216, 180, 158, 0.6);
+}
+
+.thinking {
+  align-self: flex-start;
+  font-size: 13px;
+  color: rgba(249, 237, 228, 0.4);
+  font-style: italic;
+}
+
+.inputBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(189, 96, 62, 0.25);
+  border-radius: 22px;
+  padding: 10px 8px 10px 20px;
+  flex-shrink: 0;
+  margin-top: 16px;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(249, 237, 228, 0.5);
+  font-family: "Fragment Mono", monospace;
+}
+
+.input::placeholder {
+  color: rgba(249, 237, 228, 0.5);
+}
+
+.sendButton {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(217, 217, 217, 0.4);
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.sendButton:focus {
+  outline: none;
+}
+
+.sendButton:hover {
+  background: rgba(217, 217, 217, 0.6);
+}
+
+.copyright {
+  position: absolute;
+  width: 200px;
+  right: 47px;
+  bottom: 40px;
+  font-family: "Fragment Mono", monospace;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: right;
+  color: #A47C73;
+  z-index: 2;
+}
+
+.thinkingDots::after {
+  content: '';
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0%   { content: ''; }
+  33%  { content: '.'; }
+  66%  { content: '..'; }
+  100% { content: '...'; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+.thinking {
+  align-self: flex-start;
+  font-size: 13px;
+  color: rgba(249, 237, 228, 0.6);
+  font-style: italic;
+  font-family: "Fragment Mono", monospace;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sendButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.assistantMessageWrapper {
+  position: relative;
+}
+
+.copyButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: "Fragment Mono", monospace;
+  font-size: 10px;
+  color: rgba(249, 237, 228, 0.25);
+  background: none;
+  border: 1px solid rgba(249, 237, 228, 0.1);
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.assistantMessageWrapper:hover .copyButton {
+  opacity: 1;
+}
+
+.copyButton:hover {
+  color: rgba(249, 237, 228, 0.6);
+  border-color: rgba(249, 237, 228, 0.3);
+}
