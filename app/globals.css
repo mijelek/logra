@@ -10,3 +10,8 @@ html, body {
   padding: 0;
   overflow: hidden;
 }
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
