@@ -7,7 +7,7 @@ export default function PageWrapper({ children }) {
   return (
     <div
       key={pathname}
-      style={{ animation: 'pageFadeIn 2s ease forwards' }}
+      style={{ animation: 'pageFadeIn 0s ease forwards' }}
     >
       {children}
     </div>
