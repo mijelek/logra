@@ -1,11 +1,11 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import styles from './resources.module.css'
 
 const PAGE_SIZE = 20
 
-export default function ResourcesPage() {
+function ResourcesPage() {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const [expandedId, setExpandedId] = useState(null)
@@ -226,5 +226,13 @@ export default function ResourcesPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function ResourcesPageWrapper() {
+  return (
+    <Suspense fallback={null}>
+      <ResourcesPage />
+    </Suspense>
   )
 }

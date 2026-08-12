@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import styles from './chat.module.css'
 
@@ -86,7 +86,7 @@ function ThinkingDots() {
   return <span>{dots}</span>
 }
 
-export default function ChatPage() {
+function ChatPage() {
   const [question, setQuestion] = useState('')
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(false)
@@ -256,7 +256,6 @@ export default function ChatPage() {
         // LINKEDIN
       </div>
 
-      {/* Rate limit info */}
       <div ref={dropdownRef} style={{ position: 'absolute', right: '47px', top: '50px', zIndex: 3 }}>
         <div
           onClick={() => setShowLimit(s => !s)}
@@ -448,5 +447,13 @@ export default function ChatPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ChatPageWrapper() {
+  return (
+    <Suspense fallback={null}>
+      <ChatPage />
+    </Suspense>
   )
 }
