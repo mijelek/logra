@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
+import PageWrapper from './PageWrapper'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,38 +56,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div style={{ animation: 'pageFadeIn 0.4s ease forwards' }}>
+        <PageWrapper>
           {children}
-        </div>
-        <style>{`
-          @keyframes pageFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          @media (max-width: 768px) {
-            .mobile-banner { display: block !important; }
-          }
-        `}</style>
-        <div
-          className="mobile-banner"
-          style={{
-            display: 'none',
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            background: 'rgba(74,38,29,0.97)',
-            color: 'rgba(249,237,228,0.8)',
-            fontFamily: 'monospace',
-            fontSize: '12px',
-            padding: '12px 20px',
-            textAlign: 'center',
-            zIndex: 9999,
-            backdropFilter: 'blur(8px)'
-          }}
-        >
-          Logra is best experienced on desktop for now ✳
-        </div>
+        </PageWrapper>
+        ...
       </body>
     </html>
   )
